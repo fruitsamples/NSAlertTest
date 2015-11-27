@@ -1,8 +1,8 @@
 /*
      File: AppDelegate.m 
- Abstract: Header file for this sample's application delegate.
+ Abstract: This sample's NSApplicationDelegate object.
   
-  Version: 1.0 
+  Version: 1.1 
   
  Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple 
  Inc. ("Apple") in consideration of your agreement to the following 
@@ -42,7 +42,7 @@
  STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE 
  POSSIBILITY OF SUCH DAMAGE. 
   
- Copyright (C) 2011 Apple Inc. All Rights Reserved. 
+ Copyright (C) 2012 Apple Inc. All Rights Reserved. 
   
  */
 
@@ -52,21 +52,21 @@
 @implementation AppDelegate
 
 // -------------------------------------------------------------------------------
-//	applicationShouldTerminateAfterLastWindowClosed:
+//	applicationShouldTerminateAfterLastWindowClosed:sender
 //
 //	NSApplication delegate method placed here so the sample conveniently quits
 //	after we close the window.
 // -------------------------------------------------------------------------------
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)sender
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
 #pragma unused (sender)
 	return YES;
 }
 
 // -------------------------------------------------------------------------------
-//	applicationDidFinishLaunching:
+//	applicationDidFinishLaunching:notification
 // -------------------------------------------------------------------------------
-- (void)applicationDidFinishLaunching:(NSNotification*)notification
+- (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
 #pragma unused (notification)
 	myWindowController = [[MyWindowController alloc] initWithWindowNibName:@"TestWindow"];
@@ -74,13 +74,13 @@
 }
 
 // -------------------------------------------------------------------------------
-//	openReadMe:
+//	openReadMe:sender
 // -------------------------------------------------------------------------------
 - (IBAction)openReadMe:(id)sender
 {
 #pragma unused (sender)
-	NSString *fullPath = [[NSBundle mainBundle] pathForResource:@"ReadMe" ofType:@"txt"];
-	[[NSWorkspace sharedWorkspace] openFile:fullPath];
+	NSURL *readMeURL = [[NSBundle mainBundle] URLForResource:@"ReadMe" withExtension:@"txt"];
+    [[NSWorkspace sharedWorkspace] openURL:readMeURL];
 }
 
 @end
